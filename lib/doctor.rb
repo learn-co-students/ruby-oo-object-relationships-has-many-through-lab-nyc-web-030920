@@ -8,16 +8,21 @@ class Doctor
         @@all << self
     end
 
-    def appointments
- #     returns all appointments associated with this Doctor (FAILED - 3)
-        
+    def self.all
+        @@all
     end
-    def new_appointment
- #     given a date and a patient, creates a new appointment (FAILED - 4)
-        
-    end
-    def patients
- #     has many patients, through appointments
 
+    def appointments
+        Appointment.all.select do |appointment_instance|
+            appointment_instance.doctor == self
+        end
+    end
+
+    def new_appointment(patient, date)
+        new = Appointment.new(date, patient, self)
+    end
+
+    def patients
+        appointments.map(&:patient)
     end
 end
