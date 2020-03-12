@@ -24,11 +24,6 @@ class Artist
     end
 
     def genres
-       songs.select do |song|
-            song.genre
-       end
-    #  has many genres, through songs  
-    # expecting artist.genres
-    # jz.genres => rap
+       songs.map(&:genre)
     end
 end
